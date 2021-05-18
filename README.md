@@ -10,3 +10,9 @@ used directly in AWS (It's necessary to upload the libraries), it's also necessa
 </br>
 
 _Inside each sub-folder you will find more details_
+
+</br>
+
+
+###### Telegram API: https://core.telegram.org/bots/api
+###### AWS Lambda documentation: https://aws.amazon.com/lambda/features/
