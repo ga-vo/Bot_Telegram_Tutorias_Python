@@ -27,6 +27,7 @@ In your [AWS colsole](https://aws.amazon.com/console/)
 
 7. Create new stage</br> </br>
 ![7](https://github.com/ga-vo/Tutorias-TelegramBot-Py-AWS/blob/master/images/Steps/7.png)
+</br>
 
-7. With the Invoke URL provided, visit https://api.telegram.org/bot< YOUR TOKEN>/setWebHook?url=< INVOKE URL> to set the WebHook for your bot</br> </br>
-![7](https://github.com/ga-vo/Tutorias-TelegramBot-Py-AWS/blob/master/images/Steps/8.png)
+8. With the Invoke URL provided, visit https://api.telegram.org/bot< YOUR TOKEN>/setWebHook?url=< INVOKE URL> to set the WebHook for your bot</br> </br>
+![8](https://github.com/ga-vo/Tutorias-TelegramBot-Py-AWS/blob/master/images/Steps/8.png)
