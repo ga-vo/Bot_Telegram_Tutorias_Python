@@ -5,17 +5,20 @@ TELE_TOKEN = "<YOUR TOKEN>"
 URL = "https://api.telegram.org/bot{}/".format(TELE_TOKEN)
 respuestas = {
     '/tutorias': {'description': '¿Cómo ordenar una tutoria? 📝', 'text': '''Las tutorías deben agendarse por medio de la mesa de ayuda: 🌐🔗https://mda.uis.edu.co/, seleccionando el tema de ayuda "MISION TIC/ agendar tutoría"
+Poniendo en el resumen del ticket el siguiente formato "<Grupo> - Asunto", ej: "P70-If y Else"
 
 Los horarios establecidos para el tutor 9 (Gabriel Vega) son: 
     * 8AM - 10AM
     * 4PM - 6PM
     * 6PM - 8PM
     '''},
-    '/codigo': {'description': 'Ver el código de este bot {</>}', 'text': '''El código de este bot se puede encontrar en el repositorio 🌐https://github.com/ga-vo
+    '/codigo': {'description': 'Ver el código de este bot {</>}', 'text': '''El código de este bot se puede encontrar en el repositorio 🌐https://github.com/ga-vo/Tutorias-TelegramBot-Py-AWS
     
 Este bot está soportado utilizando AWS Lambda Functions: 🌐https://aws.amazon.com/es/lambda/features/'''},
     '/contacto': {'description': 'Cómo ponerse en contacto con el tutor 🕶',
-                  'text': ''' Puedes ponerte en contacto con el tutor a través de 📧misiontic.tutor9.uis.edu.co '''}
+                  'text': ''' Puedes ponerte en contacto con el tutor a través de 📧misiontic.tutor9.uis.edu.co '''},
+    '/github': {'description': 'Visita el github del tutor ⚡ ',
+                'text': ''' Puedes visitar el github en: 🌐https://github.com/ga-vo/'''}
 }
 
 
@@ -39,7 +42,7 @@ def read_message(message):
     persona = message['message']['from']['first_name']
     me = message['message']['text']
     type_chat = message['message']['chat']['type']
-    isGroup = type_chat == 'group'
+    isGroup = type_chat == 'group' or type_chat == 'supergroup'
     id_update = message["update_id"]
     isCommand = False
     try:
@@ -51,7 +54,7 @@ def read_message(message):
         print("Error entities")
         print("Error", str(e))
 
-    return chat_id, message_id, persona, me, isGroup, isCommand,id_update
+    return chat_id, message_id, persona, me, isGroup, isCommand, id_update
 
 
 def send_message(text, chat_id):
@@ -94,14 +97,16 @@ while(True):
     for message in mensajes_diccionario["result"]:
 
         try:
-            chat_id, message_id, persona, me, isGroup, isCommand,id_update = read_message(message)
+            chat_id, message_id, persona, me, isGroup, isCommand, id_update = read_message(
+                message)
             if id_update > (ultima_id-1):
                 ultima_id = id_update + 1
 
             if(not isGroup):
-                send_message("Debes estar en un grupo para usar este bot", chat_id)
+                send_message(
+                    "Debes estar en un grupo para usar este bot", chat_id)
             # Si la ID del mensaje es mayor que el ultimo, se guarda la ID + 1
-            
+
             if("Hola" in me):
                 reply = "Hola "+persona + "! 😁"
                 reply_message(reply, chat_id, message_id)
@@ -114,8 +119,6 @@ while(True):
         except Exception as e:
             print("E")
             print("Error", str(e))
-
-        
 
     # Vaciar el diccionario
     mensajes_diccionario = []

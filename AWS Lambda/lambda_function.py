@@ -6,17 +6,20 @@ TELE_TOKEN = os.getenv('BOT_TOKEN')
 URL = "https://api.telegram.org/bot{}/".format(TELE_TOKEN)
 respuestas = {
     '/tutorias': {'description': '¿Cómo ordenar una tutoria? 📝', 'text': '''Las tutorías deben agendarse por medio de la mesa de ayuda: 🌐🔗https://mda.uis.edu.co/, seleccionando el tema de ayuda "MISION TIC/ agendar tutoría"
+Poniendo en el resumen del ticket el siguiente formato "<Grupo> - Asunto", ej: "P70-If y Else"
 
 Los horarios establecidos para el tutor 9 (Gabriel Vega) son: 
     * 8AM - 10AM
     * 4PM - 6PM
     * 6PM - 8PM
     '''},
-    '/codigo': {'description': 'Ver el código de este bot {</>}', 'text': '''El código de este bot se puede encontrar en el repositorio 🌐https://github.com/ga-vo
+    '/codigo': {'description': 'Ver el código de este bot {</>}', 'text': '''El código de este bot se puede encontrar en el repositorio 🌐https://github.com/ga-vo/Tutorias-TelegramBot-Py-AWS
     
 Este bot está soportado utilizando AWS Lambda Functions: 🌐https://aws.amazon.com/es/lambda/features/'''},
     '/contacto': {'description': 'Cómo ponerse en contacto con el tutor 🕶',
-                  'text': ''' Puedes ponerte en contacto con el tutor a través de 📧misiontic.tutor9.uis.edu.co '''}
+                  'text': ''' Puedes ponerte en contacto con el tutor a través de 📧misiontic.tutor9.uis.edu.co '''},
+    '/github': {'description': 'Visita el github del tutor ⚡ ',
+                'text': ''' Puedes visitar el github en: 🌐https://github.com/ga-vo/'''}
 }
 
 
@@ -26,13 +29,13 @@ def read_message(message):
     persona = message['message']['from']['first_name']
     me = message['message']['text']
     type_chat = message['message']['chat']['type']
-    isGroup = type_chat == 'group'
+    isGroup = type_chat == 'group' or type_chat == 'supergroup'
     isCommand = False
     try:
         varia = message['message']['entities']
         print(type(varia))
         print(varia)
-        isCommand = varia[0]['type'] == 'bot_command'
+        isCommand = varia[len(varia)-1]['type'] == 'bot_command'
     except Exception as e:
         print("Error entities")
         print("Error", str(e))
