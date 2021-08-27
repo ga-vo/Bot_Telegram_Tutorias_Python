@@ -4,7 +4,7 @@ import requests
 TELE_TOKEN = "<YOUR TOKEN>"
 URL = "https://api.telegram.org/bot{}/".format(TELE_TOKEN)
 respuestas = {
-    '/tutorias': {'description': '¿Cómo ordenar una tutoria? 📝', 'text': '''Las tutorías deben agendarse por medio de la mesa de ayuda: 🌐🔗https://mda.uis.edu.co/, seleccionando el tema de ayuda "MISION TIC/ agendar tutoría"
+    '/tutorias': {'description': '¿Cómo ordenar una tutoria? 📝', 'text': '''Las tutorías deben agendarse por medio de la mesa de ayuda: 🌐🔗https:// /, seleccionando el tema de ayuda "MISION TIC/ agendar tutoría"
 Poniendo en el resumen del ticket el siguiente formato "<Grupo> - Asunto", ej: "P70-If y Else"
 
 Los horarios establecidos para el tutor 9 (Gabriel Vega) son: 
